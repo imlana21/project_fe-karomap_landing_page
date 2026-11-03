@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUp, Mail, Menu, MessageCircle, Send } from "lucide-react";
+import { ArrowUp, Mail, MessageCircle, Send } from "lucide-react";
+import Header from "./header";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { clients, features, industries, navigation, products, showcases } from "@/stores/static/beranda2";
+import { clients, features, industries, products, showcases } from "@/stores/static/beranda2";
 
 export const metadata: Metadata = {
   title: "Field Inspection App | Karomap",
@@ -19,18 +20,7 @@ const container = "mx-auto w-full max-w-[1110px] px-5 sm:px-6";
 export default function Beranda2Page() {
   return (
     <div className="min-h-screen bg-[#f7f8fb] text-[#111827] [--brand:#f45100]">
-      <header className="sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur">
-        <div className={`${container} flex h-[76px] items-center justify-between`}>
-          <Link href="/beranda2" className="flex items-center gap-2 text-xl font-bold tracking-tight" aria-label="Karomap beranda">
-            <span className="grid size-9 place-items-center rounded-lg bg-[var(--brand)] text-sm text-white">K</span>
-            <span>KAROMAP</span>
-          </Link>
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Navigasi utama">
-            {navigation.map((item, index) => <Link key={item} href={index === 0 ? "/beranda2" : `#${item.toLowerCase()}`} className={`text-xs font-semibold uppercase tracking-[0.08em] transition-colors hover:text-[var(--brand)] ${index === 0 ? "text-[var(--brand)]" : "text-[#354052]"}`}>{item}</Link>)}
-          </nav>
-          <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Buka menu"><Menu /></Button>
-        </div>
-      </header>
+      <Header />
 
       <main>
         <section className="relative overflow-hidden bg-white pb-32 pt-20 lg:pb-44 lg:pt-28">
