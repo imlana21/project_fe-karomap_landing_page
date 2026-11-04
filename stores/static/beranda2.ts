@@ -47,7 +47,7 @@ export const showcases: ShowcaseItem[] = [
 ];
 
 export const industries = [
-  { title: "Pertambangan", image: "/beranda2/mining.jpg", href: "/pertambangan" },
+  { title: "Pertambangan", image: "/beranda2/mining.jpg", href: "/industri/pertambangan" },
   { title: "Perkebunan", image: "/beranda2/plantation.jpg", href: "/perkebunan" },
   { title: "Minyak dan Gas", image: "/beranda2/oil.jpg", href: "/minyak-dan-gas" },
   { title: "Pemerintah", image: "/beranda2/government.jpg", href: "/pemerintah" },
