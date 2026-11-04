@@ -1,6 +1,7 @@
 export default function MapboxIcon({ className }: { className?: string }) {
   return (
     <svg
+      fill="currentColor"
       viewBox="0 0 24 24"
       className={className}
       aria-hidden="true"

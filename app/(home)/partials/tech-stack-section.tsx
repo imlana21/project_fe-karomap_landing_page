@@ -11,10 +11,13 @@ import LayerIcon from "@/components/icons/LayerIcon";
 import MapboxIcon from "@/components/icons/MapboxIcon";
 import MapLibreIcon from "@/components/icons/MapLibre";
 import OpenLayersIcon from "@/components/icons/OpenLayersIcon";
+import PythonIcon from "@/components/icons/PythonIcon";
+import QGisIcon from "@/components/icons/QGisIcon";
+import PostgresIcon from "@/components/icons/PostgresIcon";
 
 const technologies = [
-  { name: "QGIS", logo: "/tech/qgis.svg" },
-  { name: "PostgreSQL", logo: "/tech/postgresql.svg" },
+  { name: "QGIS", symbol: "qgis" },
+  { name: "PostgreSQL", symbol: "postgres" },
   { name: "PostGIS", symbol: "database" },
   { name: "GeoServer", symbol: "server" },
   { name: "MapLibre", symbol: "maplibre" },
@@ -23,7 +26,7 @@ const technologies = [
   { name: "Leaflet", symbol: "leaf" },
   { name: "MapStore", symbol: "map" },
   { name: "GDAL/OGR", symbol: "globe" },
-  { name: "Python", logo: "/tech/python.svg" },
+  { name: "Python", symbol: "python" },
   { name: "GRASS GIS", symbol: "grass" },
   { name: "SAGA GIS", symbol: "analytics" },
   { name: "deck.gl", symbol: "layers" },
@@ -64,6 +67,9 @@ function TechSymbol({ type }: { type: string }) {
   if (type === "mapbox") return <MapboxIcon className={common} />;
   if (type === "maplibre") return <MapLibreIcon className={common} />;
   if (type === "openlayers") return <OpenLayersIcon className={common} />;
+  if (type === "qgis") return <QGisIcon className={common} />;
+  if (type === "python") return <PythonIcon className={common} />;
+  if (type === "postgres") return <PostgresIcon className={common} />;
 
   return <LayerIcon className={common} />;
 }
@@ -107,17 +113,7 @@ export function TechStackSection() {
               key={technology.name}
               className="group flex min-h-36 flex-col items-center justify-center rounded-lg border border-blue-100/80 bg-white/90 p-5 text-center shadow-[0_8px_24px_rgba(59,96,150,.06)] transition duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-[0_14px_32px_rgba(59,96,150,.12)]"
             >
-              {"logo" in technology ? (
-                <Image
-                  src={technology.logo}
-                  alt=""
-                  width={56}
-                  height={56}
-                  className="size-14 grayscale transition duration-300 group-hover:grayscale-0"
-                />
-              ) : (
-                <TechSymbol type={technology.symbol} />
-              )}
+              <TechSymbol type={technology.symbol} />
               <span className="mt-4 text-sm font-semibold text-[#354052]">
                 {technology.name}
               </span>

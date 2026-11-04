@@ -14,7 +14,7 @@ import {
   products,
   showcases,
 } from "@/stores/static/beranda2";
-import { TechStackSection } from "./tech-stack-section";
+import { TechStackSection } from "./partials/tech-stack-section";
 import AppHeader from "@/components/AppHeader";
 
 export const metadata: Metadata = {
@@ -94,7 +94,9 @@ export default function Beranda2Page() {
                 >
                   <CardContent className="flex min-h-44 flex-col items-center justify-center p-6 text-center">
                     <Icon className="size-9 stroke-[1.6] text-(--brand) transition-transform duration-200 ease-out motion-safe:group-hover:scale-110 motion-safe:group-hover:-rotate-3" />
-                    <h2 className="mt-4 text-xl font-medium transition-colors group-hover:text-(--brand)">{title}</h2>
+                    <h2 className="mt-4 text-xl font-medium transition-colors group-hover:text-(--brand)">
+                      {title}
+                    </h2>
                     <p className="mt-2 text-sm leading-6 text-[#8295b0] transition-colors group-hover:text-[#657187]">
                       {description}
                     </p>
