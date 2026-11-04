@@ -23,8 +23,8 @@ export default function Beranda2Page() {
       <Header />
 
       <main>
-        <section className="relative overflow-hidden bg-white pb-32 pt-20 lg:pb-44 lg:pt-28">
-          <div className={`${container} grid items-center gap-14 lg:grid-cols-[0.86fr_1.14fr]`}>
+        <section className="relative overflow-x-clip bg-white pb-32 pt-20 lg:pb-44 lg:pt-28">
+          <div className={`${container} relative z-10 grid items-center gap-14 lg:grid-cols-[0.86fr_1.14fr]`}>
             <div className="relative z-10 max-w-xl">
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--brand)]">Karomap Inspection Suite</p>
               <h1 className="text-4xl font-normal uppercase leading-tight tracking-[0.04em] sm:text-5xl">Field Inspection App</h1>
@@ -36,14 +36,23 @@ export default function Beranda2Page() {
               <Image src="/beranda2/hero.png" alt="Karomap pada laptop dan perangkat mobile" fill priority sizes="(min-width: 1024px) 55vw, 100vw" className="relative object-contain drop-shadow-2xl" />
             </div>
           </div>
-          <div className={`${container} absolute inset-x-0 -bottom-1 translate-y-1/2`}>
+          <svg
+            viewBox="0 0 1440 190"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-44 w-full text-[#f7f8fb] md:block"
+            aria-hidden="true"
+          >
+            <path d="M0 100C310 108 540 150 820 131C1080 113 1260 65 1440 48V190H0Z" fill="currentColor" />
+          </svg>
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-[#f7f8fb] md:hidden" aria-hidden="true" />
+          <div className={`${container} relative z-20 mt-14 md:absolute md:inset-x-0 md:-bottom-1 md:mt-0 md:translate-y-1/2`}>
             <div className="grid gap-5 md:grid-cols-3 md:px-14">
               {products.map(({ title, description, icon: Icon }) => <Card key={title} className="rounded-md border-[#e5e8ed] bg-white shadow-[0_12px_35px_rgba(35,45,65,.08)]"><CardContent className="flex min-h-44 flex-col items-center justify-center p-6 text-center"><Icon className="size-9 stroke-[1.6] text-[var(--brand)]" /><h2 className="mt-4 text-xl font-medium">{title}</h2><p className="mt-2 text-sm leading-6 text-[#8295b0]">{description}</p></CardContent></Card>)}
             </div>
           </div>
         </section>
 
-        <section className="pb-28 pt-44 lg:pb-36 lg:pt-52">
+        <section className="pb-28 pt-20 md:pt-44 lg:pb-36 lg:pt-52">
           <div className={`${container} grid gap-x-24 gap-y-12 md:grid-cols-2`}>
             {features.map(({ title, description, icon: Icon }) => <article key={title} className="flex gap-5"><span className="grid size-12 shrink-0 place-items-center rounded-full bg-[#fbe9e1] text-[var(--brand)]"><Icon className="size-5 stroke-[1.7]" /></span><div><h2 className="text-xl font-normal">{title}</h2><p className="mt-3 text-[15px] leading-7 text-[#8295b0]">{description}</p></div></article>)}
           </div>
