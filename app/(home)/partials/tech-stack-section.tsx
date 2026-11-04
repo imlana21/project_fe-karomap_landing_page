@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { PageContainer } from "@/components/site/page-container";
 import DatabaseIcon from "@/components/icons/DatabaseIcon";
 import ServerIcon from "@/components/icons/ServerIcon";

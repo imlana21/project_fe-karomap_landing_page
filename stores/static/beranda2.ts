@@ -23,8 +23,8 @@ export interface ShowcaseItem {
 export const navigation = ["Beranda", "Industri", "Solusi", "Artikel", "Kontak"];
 
 export const products: ProductCard[] = [
-  { title: "Mobile App", description: "Inspeksi dan collecting data secara Online/Offline", icon: Smartphone },
-  { title: "Web App", description: "Manajemen, analisis dan visualisasi data", icon: ClipboardList },
+  { title: "Mobile App", description: "Survey, Patroli, Sensus tanaman, E-Mandor, inspeksi asset, HSE", icon: Smartphone },
+  { title: "Web App", description: "Webgis, Map portal, Map history, Map dashboard, Managemen data, Repositori & Analisa spatial.", icon: ClipboardList },
   { title: "GIS Web", description: "Dynamic Geodatabase Management System", icon: Layers3 },
 ];
 
