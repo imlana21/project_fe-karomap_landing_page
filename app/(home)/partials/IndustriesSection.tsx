@@ -5,7 +5,7 @@ import { industries } from "@/stores/static/home";
 
 export function IndustriesSection() {
   return (
-    <section id="industri" className="py-20 lg:py-32">
+    <section id="industri" className="py-10">
       <PageContainer>
         {/* Header */}
         <header className="mx-auto max-w-4xl text-center">

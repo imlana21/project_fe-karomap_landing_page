@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import AppHeader from "@/components/AppHeader";
 import ClientsSection from "./partials/ClientsSection";
-import FeaturesSection from "./partials/FeaturesSection";
 import HeroSection from "./partials/HeroSection";
 import { IndustriesSection } from "./partials/IndustriesSection";
 import TechStackSection from "./partials/TechStackSection";
@@ -20,7 +19,6 @@ export default function HomePage() {
       <AppHeader />
       <main>
         <HeroSection />
-        <FeaturesSection />
         <ServicesSection />
         <TechStackSection />
         <IndustriesSection />

@@ -61,7 +61,7 @@ export default function TechStackSection() {
   return (
     <section
       aria-labelledby="tech-title"
-      className="relative overflow-hidden bg-[#f4f8ff] py-20 sm:py-28 lg:py-32"
+      className="relative overflow-hidden bg-[#f4f8ff] py-10"
     >
       {/* Background decorations */}
       <Contours className="pointer-events-none absolute -left-20 -top-10 w-107.5 text-[#c7dcff]/70" />

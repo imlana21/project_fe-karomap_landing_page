@@ -8,7 +8,7 @@ import { PageContainer } from "@/components/site/PageContainer";
 import { clients } from "@/stores/static/home";
 
 const ITEMS_PER_PAGE = 4;
-const AUTO_PLAY_DELAY = 5000;
+const AUTO_PLAY_DELAY = 4000;
 
 // Group clients into pages of 4
 const clientPages = Array.from(
@@ -53,11 +53,7 @@ export default function ClientsSection() {
   if (totalPages === 0) return null;
 
   return (
-    <section
-      id="clients"
-      aria-labelledby="clients-title"
-      className="py-20 lg:py-28"
-    >
+    <section id="clients" aria-labelledby="clients-title" className="py-10">
       <PageContainer>
         {/* Header */}
         <header className="mx-auto max-w-4xl text-center">

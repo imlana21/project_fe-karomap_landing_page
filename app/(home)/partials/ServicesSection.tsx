@@ -5,7 +5,7 @@ import { PageContainer } from "@/components/site/PageContainer";
 
 export default function ServicesSection() {
   return (
-    <section className="pb-20 lg:pb-32">
+    <section className="">
       <PageContainer>
         {/* Section heading */}
         <div className="text-center">

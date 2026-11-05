@@ -4,6 +4,7 @@ import {
   History,
   Layers3,
   LockKeyhole,
+  Monitor,
   RefreshCw,
   Smartphone,
   Users,
@@ -17,77 +18,26 @@ export interface ProductCard {
   icon: LucideIcon;
 }
 
-export const products: ProductCard[] = [
-  {
-    title: "Mobile App",
-    description:
-      "Survey, Patroli, Sensus tanaman, E-Mandor, inspeksi asset, HSE",
-    icon: Smartphone,
-  },
+export const appServices = [
   {
     title: "Web App",
+    icon: Monitor,
     description:
-      "Webgis, Map portal, Map history, Map dashboard, Managemen data, Repositori & Analisa spatial.",
-    icon: ClipboardList,
+      "WebGIS, Map Portal, Map History, Dashboard Spasial, Manajemen Data, Repositori, dan Analisis Spasial.",
   },
-];
+  {
+    title: "Mobile App",
+    icon: Smartphone,
+    description:
+      "Survei Lapangan, Patroli, Sensus Tanaman, E-Mandor, Inspeksi Aset, dan HSE.",
+  },
+] as const;
 
 export interface FeatureItem {
   title: string;
   description: string;
   icon: LucideIcon;
 }
-
-export const features: FeatureItem[] = [
-  {
-    title: "Pilihan Sistem Proteksi Data",
-    description:
-      "Penyimpanan dan proteksi data hasil inspeksi dapat disesuaikan dengan sistem perusahaan: cloud, intranet, maupun ekstranet.",
-    icon: LockKeyhole,
-  },
-  {
-    title: "Otomatisasi Pelaporan dan Transfer Data",
-    description:
-      "Integrasi mobile dan web secara real-time mempercepat pengiriman data lapangan serta otomatisasi pelaporan.",
-    icon: RefreshCw,
-  },
-  {
-    title: "Data Historis",
-    description:
-      "Riwayat inspeksi tersimpan dari waktu ke waktu untuk penilaian kondisi aset, evaluasi, dan prediksi.",
-    icon: History,
-  },
-  {
-    title: "Anotasi Foto",
-    description:
-      "Tambahkan tanda dan catatan pada foto agar analisis kondisi objek lebih rinci dan mudah dipahami.",
-    icon: Bookmark,
-  },
-  {
-    title: "GIS Supports",
-    description:
-      "Kelola layer, ekspor-impor data, citra satelit, serta drone imagery dalam satu modul spasial.",
-    icon: Layers3,
-  },
-  {
-    title: "Smart Report",
-    description:
-      "Rekapitulasi dan statistik otomatis membantu analisis, penyajian laporan, serta pengambilan keputusan.",
-    icon: ClipboardList,
-  },
-  {
-    title: "Work Online/Offline",
-    description:
-      "Aplikasi mobile tetap dapat digunakan di lokasi tanpa koneksi internet dan disinkronkan saat kembali online.",
-    icon: Wifi,
-  },
-  {
-    title: "Multi Level User",
-    description:
-      "Akses data dikelola berdasarkan peran agar informasi aman dan keputusan dapat dibuat lebih cepat.",
-    icon: Users,
-  },
-];
 
 export interface ServicesItem {
   title: string;

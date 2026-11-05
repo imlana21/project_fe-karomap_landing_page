@@ -300,7 +300,7 @@ export default function AppHeader({ active }: AppHeaderProps) {
           : "border-black/5 bg-white/95 shadow-[0_2px_12px_rgba(15,23,42,.05)] backdrop-blur-md",
       ].join(" ")}
     >
-      <PageContainer className="max-w-300">
+      <PageContainer className="max-w-360">
         <div className="flex h-18.5 items-center justify-between gap-6">
           {/* Logo */}
           <Link
