@@ -1,5 +1,5 @@
 import { PageContainer } from "@/components/site/page-container";
-import { features } from "@/stores/static/beranda2";
+import { features } from "@/stores/static/home";
 
 export default function FeaturesSection() {
   return (

@@ -228,10 +228,60 @@ export const industries: IndustriesItem[] = [
 ];
 
 export const clients = [
-  "GeoHub",
-  "Jogja Smart Province",
-  "Kementerian PUPR",
-  "Provinsi Riau",
-  "Adaro",
-  "Mitra Geotama",
+  {
+    name: "Daerah Istimewa Yogyakarta",
+    image: "/home/clients/diy.png",
+  },
+  {
+    name: "MARS Harvest",
+    image: "/home/clients/mars.svg",
+  },
+  {
+    name: "Kementerian Lingkungan Hidup dan Kehutanan",
+    image: "/home/clients/klhk.png",
+  },
+  {
+    name: "Adaro Energy Indonesia",
+    image: "/home/clients/adaro.png",
+  },
+  {
+    name: "Kementerian PUPR",
+    image: "/home/clients/pupr.png",
+  },
+  {
+    name: "WWF Indonesia",
+    image: "/home/clients/wwf.png",
+  },
+  {
+    name: "Kereta Api Indonesia",
+    image: "/home/clients/kai.png",
+  },
+  {
+    name: "Universitas Gadjah Mada",
+    image: "/home/clients/ugm.svg",
+  },
+  {
+    name: "United States Agency International Development",
+    image: "/home/clients/usaid.png",
+  },
+  {
+    name: "Geohub",
+    image: "/home/clients/geohub.png",
+  },
+  {
+    name: "Provinsi Riau",
+    image: "/home/clients/riau.png",
+  },
+  {
+    name: "Mitra Geotama",
+    image: "/home/clients/mitrageotama.png",
+  },
+  {
+    name: "Kabupaten Sleman",
+    image: "/home/clients/sleman.png",
+  },
+  {
+    name: "Kabupaten Purworejo",
+    image: "/home/clients/purworejo.png",
+  },
 ];

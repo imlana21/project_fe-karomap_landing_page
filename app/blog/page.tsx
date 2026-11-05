@@ -13,7 +13,7 @@ import AppHeader from "../../components/AppHeader";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { PageContainer } from "@/components/site/page-container";
 import { PageHero } from "@/components/site/page-hero";
-import { SiteFooter } from "@/components/site/site-footer";
+import AppFooter from "@/components/AppFooter";
 import { blogPosts } from "@/stores/static/blog";
 
 export const metadata: Metadata = {
@@ -120,7 +120,7 @@ export default function BlogPage() {
         </section>
       </main>
 
-      <SiteFooter />
+      <AppFooter />
     </div>
   );
 }

@@ -70,15 +70,15 @@ export default function TechStackSection() {
 
       <PageContainer className="relative z-10">
         {/* Header */}
-        <header className="mx-auto max-w-3xl text-center">
+        <header className="mx-auto max-w-4xl text-center">
           <h2
             id="tech-title"
-            className="text-3xl font-semibold tracking-tight sm:text-4xl"
+            className="text-3xl font-normal uppercase tracking-[0.04em] sm:text-4xl"
           >
             Technology Behind Our GIS
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-7 text-[#657187] sm:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-7 text-[#8295b0]">
             Built with trusted geospatial technologies for a flexible, scalable,
             and data-driven GIS platform.
           </p>

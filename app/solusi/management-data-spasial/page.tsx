@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ContactForm } from "@/components/site/contact-form";
 import { PageContainer } from "@/components/site/page-container";
 import { PageHero } from "@/components/site/page-hero";
-import { SiteFooter } from "@/components/site/site-footer";
+import AppFooter from "@/components/AppFooter";
 
 export const metadata: Metadata = {
   title: "Manajemen Data Spasial Pertambangan | Karomap",
@@ -113,7 +113,7 @@ export function MiningPage({ active }: { active: "industry" | "solution" }) {
         </section>
       </main>
 
-      <SiteFooter />
+      <AppFooter />
     </div>
   );
 }

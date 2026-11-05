@@ -1,22 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PageContainer } from "@/components/site/page-container";
-import { industries } from "@/stores/static/beranda2";
+import { industries } from "@/stores/static/home";
 
 export function IndustriesSection() {
   return (
     <section id="industri" className="py-20 lg:py-32">
       <PageContainer>
         {/* Header */}
-        <header className="mx-auto max-w-2xl text-center">
+        <header className="mx-auto max-w-4xl text-center">
           <h2
             id="industries-title"
-            className="text-3xl font-semibold tracking-tight sm:text-4xl"
+            className="text-3xl font-normal uppercase tracking-[0.04em] sm:text-4xl"
           >
             Industri
           </h2>
 
-          <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-7 text-[#657187] sm:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-7 text-[#8295b0]">
             Platform kami dapat diterapkan di berbagai industri dan disesuaikan
             dengan kebutuhan perusahaan Anda.
           </p>

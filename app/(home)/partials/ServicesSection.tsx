@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { services } from "@/stores/static/beranda2";
+import { services } from "@/stores/static/home";
 import { PageContainer } from "@/components/site/page-container";
 
 export default function ServicesSection() {

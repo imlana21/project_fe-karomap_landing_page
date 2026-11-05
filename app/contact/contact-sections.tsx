@@ -115,7 +115,7 @@ export function ContactMapSection() {
   return (
     <section id="map" className="border-y bg-[#e9edf2]">
       <iframe
-        title="CV. Karomap Semesta"
+        title="Karomap Semesta"
         src="https://www.google.com/maps?q=Karomap%20Sleman&output=embed"
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"

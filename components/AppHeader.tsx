@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 import { PageContainer } from "@/components/site/page-container";
-import { industries } from "@/stores/static/beranda2";
+import { industries } from "@/stores/static/home";
 
 // Types
 type NavKey = "home" | "industry" | "solution" | "blog" | "contact";
@@ -293,7 +293,6 @@ export default function AppHeader({ active }: AppHeaderProps) {
     };
   }, []);
 
-  // Transparent only on homepage
   const transparent = pathname === "/" && !scrolled && !mobileOpen;
 
   return (
@@ -307,7 +306,7 @@ export default function AppHeader({ active }: AppHeaderProps) {
           : "border-black/5 bg-white/95 shadow-[0_2px_12px_rgba(15,23,42,.05)] backdrop-blur-md",
       ].join(" ")}
     >
-      <PageContainer>
+      <PageContainer className="max-w-300">
         <div className="flex h-18.5 items-center justify-between gap-6">
           {/* Logo */}
           <Link
