@@ -19,7 +19,7 @@ function HeroContainer() {
             Pengembangan Aplikasi GIS
           </h1>
 
-          <p className="max-w-[48ch] text-[15px] leading-7 text-[#65758b]">
+          <p className="max-w-[48ch] leading-7 text-[#65758b]">
             Solusi aplikasi GIS berbasis web dan mobile untuk mendukung
             pengelolaan data spasial, operasional lapangan, dan pengambilan
             keputusan.
@@ -35,11 +35,11 @@ function HeroContainer() {
               </div>
 
               <div className="min-w-0">
-                <h2 className="text-sm font-semibold text-[#354052]">
+                <h2 className="text-md font-semibold text-[#354052]">
                   {title}
                 </h2>
 
-                <p className="mt-1 text-sm leading-6 text-[#65758b]">
+                <p className="mt-1 text-md leading-6 text-[#65758b]">
                   {description}
                 </p>
               </div>
