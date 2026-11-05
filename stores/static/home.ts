@@ -11,13 +11,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-export const navigation = [
-  "Beranda",
-  "Industri",
-  "Solusi",
-  "Artikel",
-  "Kontak",
-];
+export const navigation = ["Beranda", "Solusi", "Artikel", "Kontak"];
 
 export interface ProductCard {
   title: string;

@@ -73,12 +73,6 @@ const navItems: NavItem[] = [
   },
   {
     type: "dropdown",
-    key: "industry",
-    label: "INDUSTRI",
-    items: industryLinks,
-  },
-  {
-    type: "dropdown",
     key: "solution",
     label: "SOLUSI",
     items: solutionLinks,
