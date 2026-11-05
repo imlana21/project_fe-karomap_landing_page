@@ -59,8 +59,16 @@ export default function AppFooter({
             </p>
             <p className="mt-3 text-sm leading-7">
               Telepon:{" "}
-              <a href="tel:+622742820302" className="hover:text-white">
-                +62 812-2592-5600
+              <a href="tel:02742820302" className="hover:text-white">
+                0274 2820 302
+              </a>
+              <br />
+              WA:{" "}
+              <a
+                href="https://wa.me/+6281327483846"
+                className="hover:text-white"
+              >
+                0813 2748 3846
               </a>
               <br />
               Email:{" "}

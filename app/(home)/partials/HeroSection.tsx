@@ -2,7 +2,7 @@ import Image from "next/image";
 import { PageContainer } from "@/components/site/PageContainer";
 import { cn } from "@/lib/utils";
 import { Fragment } from "react";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, Smartphone } from "lucide-react";
 import { appServices } from "@/stores/static/home";
 
 function HeroContainer() {
@@ -61,14 +61,25 @@ function HeroContainer() {
           </a>
 
           <a
-            href="tel:+6281225925600"
+            href="tel:02742820302"
             className="inline-flex items-center gap-2 text-sm text-[#65758b] transition-colors hover:text-(--brand)"
           >
             <Phone
               className="size-4 shrink-0 text-(--brand)"
               aria-hidden="true"
             />
-            +62 812-2592-5600
+            0274 2820 302
+          </a>
+          <a
+            href="https://wa.me/+6281327483846"
+            className="inline-flex items-center gap-2 text-sm text-[#65758b] transition-colors hover:text-(--brand)"
+            target="_blank"
+          >
+            <Smartphone
+              className="size-4 shrink-0 text-(--brand)"
+              aria-hidden="true"
+            />
+            0813 2748 3846
           </a>
         </address>
       </div>
