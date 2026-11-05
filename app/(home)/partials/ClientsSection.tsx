@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { PageContainer } from "@/components/site/page-container";
+import { PageContainer } from "@/components/site/PageContainer";
 import { clients } from "@/stores/static/home";
 
 const ITEMS_PER_PAGE = 4;

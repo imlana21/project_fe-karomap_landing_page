@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
-import { PageContainer } from "@/components/site/page-container";
+import { PageContainer } from "@/components/site/PageContainer";
 import { cn } from "@/lib/utils";
 import { products } from "@/stores/static/home";
 import { Fragment } from "react";

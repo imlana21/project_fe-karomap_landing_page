@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PageContainer } from "@/components/site/page-container";
+import { PageContainer } from "@/components/site/PageContainer";
 import { industries } from "@/stores/static/home";
 
 export function IndustriesSection() {

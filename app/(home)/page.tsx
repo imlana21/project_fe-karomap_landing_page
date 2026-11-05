@@ -9,7 +9,7 @@ import ServicesSection from "./partials/ServicesSection";
 import AppFooter from "@/components/AppFooter";
 
 export const metadata: Metadata = {
-  title: "Karomap - Field Inspection App",
+  title: "Beranda",
   description:
     "Platform inspeksi lapangan online dan offline dengan WebGIS, laporan otomatis, dan manajemen data spasial.",
 };

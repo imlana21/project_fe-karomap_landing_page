@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import AppHeader from "../../../components/AppHeader";
 import { Card, CardContent } from "@/components/ui/card";
-import { ContactForm } from "@/components/site/contact-form";
-import { PageContainer } from "@/components/site/page-container";
-import { PageHero } from "@/components/site/page-hero";
+import { ContactForm } from "@/components/site/ContactField";
+import { PageContainer } from "@/components/site/PageContainer";
+import { PageHero } from "@/components/site/PageHero";
 import AppFooter from "@/components/AppFooter";
 
 export const metadata: Metadata = {

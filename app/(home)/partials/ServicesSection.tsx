@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
 import { services } from "@/stores/static/home";
-import { PageContainer } from "@/components/site/page-container";
+import { PageContainer } from "@/components/site/PageContainer";
 
 export default function ServicesSection() {
   return (

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { ContactForm } from "@/components/site/contact-form";
-import { PageContainer } from "@/components/site/page-container";
+import { ContactForm } from "@/components/site/ContactField";
+import { PageContainer } from "@/components/site/PageContainer";
 import { Card, CardContent } from "@/components/ui/card";
 
 const contacts = [
@@ -113,14 +113,14 @@ export function ContactFormSection() {
 
 export function ContactMapSection() {
   return (
-    <section id="map" className="border-y bg-[#e9edf2]">
+    <PageContainer className="">
       <iframe
         title="Karomap Semesta"
         src="https://www.google.com/maps?q=Karomap%20Sleman&output=embed"
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        className="block h-125 w-full border-0"
+        className="block h-100 w-full border-0 rounded-lg"
       />
-    </section>
+    </PageContainer>
   );
 }

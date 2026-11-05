@@ -1,4 +1,4 @@
-import { PageContainer } from "@/components/site/page-container";
+import { PageContainer } from "@/components/site/PageContainer";
 
 import DatabaseIcon from "@/components/icons/DatabaseIcon";
 import ServerIcon from "@/components/icons/ServerIcon";

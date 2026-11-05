@@ -11,8 +11,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-export const navigation = ["Beranda", "Solusi", "Artikel", "Kontak"];
-
 export interface ProductCard {
   title: string;
   description: string;
@@ -158,7 +156,7 @@ export const services: ServicesItem[] = [
   },
 ];
 
-type IndustriesItem = {
+export type IndustriesItem = {
   title: string;
   image: string;
   href: string;
@@ -221,7 +219,12 @@ export const industries: IndustriesItem[] = [
   },
 ];
 
-export const clients = [
+export type ClientsItem = {
+  name: string;
+  image: string;
+};
+
+export const clients: ClientsItem[] = [
   {
     name: "Daerah Istimewa Yogyakarta",
     image: "/home/clients/diy.png",

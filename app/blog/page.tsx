@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 import AppHeader from "../../components/AppHeader";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { PageContainer } from "@/components/site/page-container";
-import { PageHero } from "@/components/site/page-hero";
+import { PageContainer } from "@/components/site/PageContainer";
+import { PageHero } from "@/components/site/PageHero";
 import AppFooter from "@/components/AppFooter";
 import { blogPosts } from "@/stores/static/blog";
 
@@ -26,10 +26,8 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white text-[#111827] [--brand:#f45100]">
       <AppHeader active="blog" />
-
       <main>
         <PageHero title="Artikel" current="Blog" />
-
         <section className="py-20 sm:py-28">
           <PageContainer>
             <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
@@ -38,7 +36,7 @@ export default function BlogPage() {
                   <Card className="group h-full overflow-hidden rounded-md border-0 bg-white p-0 shadow-[0_10px_35px_rgba(31,41,55,.10)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(31,41,55,.15)]">
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="relative block aspect-[16/10] overflow-hidden bg-slate-100"
+                      className="relative block aspect-16/10 overflow-hidden bg-slate-100"
                     >
                       <Image
                         src={post.image}

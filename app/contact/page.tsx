@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import AppHeader from "../../components/AppHeader";
-import { PageHero } from "@/components/site/page-hero";
+import { PageHero } from "@/components/site/PageHero";
 import AppFooter from "@/components/AppFooter";
 import {
   ContactFormSection,
@@ -26,7 +26,7 @@ export default function ContactPage() {
         <ContactMapSection />
       </main>
 
-      <AppFooter compact />
+      <AppFooter />
     </div>
   );
 }

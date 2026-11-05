@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 
-import { PageContainer } from "@/components/site/page-container";
+import { PageContainer } from "@/components/site/PageContainer";
 import { industries } from "@/stores/static/home";
 
 // Types
