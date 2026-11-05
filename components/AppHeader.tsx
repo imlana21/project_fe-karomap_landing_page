@@ -309,7 +309,7 @@ export default function AppHeader({ active }: AppHeaderProps) {
             className="relative block h-7 w-34 shrink-0"
           >
             <Image
-              src="/beranda2/karomap-logo.png"
+              src="/logo.webp"
               alt="Karomap"
               fill
               priority
