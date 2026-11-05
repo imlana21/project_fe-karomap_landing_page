@@ -1,212 +1,445 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronDown, Menu } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { ChevronDown, Menu, X } from "lucide-react";
 
-import { industries as industryCards } from "@/stores/static/beranda2";
+import { PageContainer } from "@/components/site/page-container";
+import { industries } from "@/stores/static/beranda2";
 
-const industries = industryCards.map(
-  ({ title, href }) => [title, href] as const,
-);
+// Types
+type NavKey = "home" | "industry" | "solution" | "blog" | "contact";
 
-const solutions = [
-  ["Manajemen Data Spasial Pertambangan", "/solusi/management-data-spasial"],
-  [
-    "Efisiensi dan Transparansi Data Produksi Kelapa Sawit",
-    "/efisiensi-dan-transparansi-data",
-  ],
-  ["Jalan dan Jembatan", "/jalan-dan-jembatan"],
-  ["Keselamatan Kerja dan Aset Fisik", "/keselamatan-kerja-dan-asset"],
-  ["PDAM", "/pdam"],
-] as const;
+type MenuLink = {
+  label: string;
+  href: string;
+};
 
-function DesktopMenu({
+type NavItem =
+  | {
+      type: "link";
+      key: NavKey;
+      label: string;
+      href: string;
+    }
+  | {
+      type: "dropdown";
+      key: NavKey;
+      label: string;
+      items: readonly MenuLink[];
+    };
+
+interface AppHeaderProps {
+  active?: NavKey;
+}
+
+// Navigation data
+const industryLinks: MenuLink[] = industries.map(({ title, href }) => ({
+  label: title,
+  href,
+}));
+
+const solutionLinks: MenuLink[] = [
+  {
+    label: "Manajemen Data Spasial Pertambangan",
+    href: "/solusi/management-data-spasial",
+  },
+  {
+    label: "Efisiensi dan Transparansi Data Produksi Kelapa Sawit",
+    href: "/efisiensi-dan-transparansi-data",
+  },
+  {
+    label: "Jalan dan Jembatan",
+    href: "/jalan-dan-jembatan",
+  },
+  {
+    label: "Keselamatan Kerja dan Aset Fisik",
+    href: "/keselamatan-kerja-dan-asset",
+  },
+  {
+    label: "PDAM",
+    href: "/pdam",
+  },
+];
+
+const navItems: NavItem[] = [
+  {
+    type: "link",
+    key: "home",
+    label: "BERANDA",
+    href: "/",
+  },
+  {
+    type: "dropdown",
+    key: "industry",
+    label: "INDUSTRI",
+    items: industryLinks,
+  },
+  {
+    type: "dropdown",
+    key: "solution",
+    label: "SOLUSI",
+    items: solutionLinks,
+  },
+  {
+    type: "link",
+    key: "blog",
+    label: "ARTIKEL",
+    href: "/blog",
+  },
+  {
+    type: "link",
+    key: "contact",
+    label: "KONTAK",
+    href: "/contact",
+  },
+];
+
+// Helpers
+const navTextClass =
+  "text-[13px] font-semibold tracking-[0.04em] transition-colors duration-200";
+
+function getNavColor(active: boolean) {
+  return active ? "text-(--brand)" : "text-[#354052] hover:text-(--brand)";
+}
+
+function resolveActive(pathname: string): NavKey | null {
+  if (pathname === "/") return "home";
+
+  if (pathname.startsWith("/blog")) return "blog";
+
+  if (pathname.startsWith("/contact")) return "contact";
+
+  if (industryLinks.some(({ href }) => href !== "#" && pathname === href)) {
+    return "industry";
+  }
+
+  if (
+    pathname.startsWith("/solusi") ||
+    solutionLinks.some(({ href }) => pathname === href)
+  ) {
+    return "solution";
+  }
+
+  return null;
+}
+
+// Desktop dropdown
+function DesktopDropdown({
   label,
   items,
-  active = false,
+  active,
 }: {
   label: string;
-  items: readonly (readonly [string, string])[];
-  active?: boolean;
+  items: readonly MenuLink[];
+  active: boolean;
 }) {
+  const [open, setOpen] = useState(false);
+  const menuId = useId();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   return (
-    <div className="group relative flex h-full items-center">
+    <div
+      className="relative flex h-full items-center"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) {
+          setOpen(false);
+        }
+      }}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          setOpen(false);
+          buttonRef.current?.focus();
+        }
+      }}
+    >
       <button
+        ref={buttonRef}
         type="button"
-        className={`flex h-full items-center gap-1.5 text-[13px] font-semibold tracking-[0.04em] transition-colors hover:text-(--brand) ${active ? "text-(--brand)" : "text-[#354052]"}`}
-        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-controls={menuId}
+        onClick={() => setOpen((prev) => !prev)}
+        className={[
+          "flex h-full items-center gap-1.5",
+          navTextClass,
+          getNavColor(active),
+        ].join(" ")}
       >
         {label}
-        <ChevronDown className="size-3.5 transition-transform group-hover:rotate-180" />
+
+        <ChevronDown
+          aria-hidden="true"
+          className={[
+            "size-3.5 transition-transform duration-200",
+            open ? "rotate-180" : "",
+          ].join(" ")}
+        />
       </button>
+
+      {/* Dropdown panel */}
       <div
-        className="invisible absolute left-0 top-full w-72 translate-y-2 border-t-2 border-(--brand) bg-white py-2 opacity-0 shadow-[0_12px_30px_rgba(20,30,50,.12)] transition duration-150 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100"
-        role="menu"
+        id={menuId}
+        aria-hidden={!open}
+        className={[
+          "absolute left-0 top-full z-50 w-80",
+          "rounded-b-lg border-t-2 border-(--brand)",
+          "bg-white py-2 shadow-[0_12px_30px_rgba(20,30,50,.12)]",
+          "transition-[opacity,transform,visibility] duration-200",
+          open
+            ? "visible translate-y-0 opacity-100"
+            : "invisible translate-y-2 opacity-0",
+        ].join(" ")}
       >
-        {items.map(([title, href]) => (
-          <Link
-            key={href}
-            href={href}
-            role="menuitem"
-            className="block px-5 py-2.5 text-[12px] font-semibold uppercase leading-5 tracking-[0.035em] text-[#354052] transition-colors hover:bg-[#f7f8fb] hover:text-(--brand)"
-          >
-            {title}
-          </Link>
-        ))}
+        <ul>
+          {items.map(({ label: itemLabel, href }) => (
+            <li key={`${itemLabel}-${href}`}>
+              <Link
+                href={href}
+                tabIndex={open ? 0 : -1}
+                onClick={() => setOpen(false)}
+                className={[
+                  "block px-5 py-3",
+                  "text-xs font-semibold uppercase leading-5",
+                  "tracking-[0.035em] text-[#354052]",
+                  "transition-colors duration-200",
+                  "hover:bg-[#f7f8fb] hover:text-(--brand)",
+                  "focus-visible:bg-[#f7f8fb]",
+                  "focus-visible:outline-none",
+                ].join(" ")}
+              >
+                {itemLabel}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 }
 
-function MobileMenu({
+// Mobile dropdown
+function MobileDropdown({
   label,
   items,
+  onNavigate,
 }: {
   label: string;
-  items: readonly (readonly [string, string])[];
+  items: readonly MenuLink[];
+  onNavigate: () => void;
 }) {
   return (
-    <details className="border-t border-slate-100">
-      <summary className="flex cursor-pointer list-none items-center justify-between py-3 text-sm font-semibold uppercase text-[#354052] marker:content-none">
+    <details className="group border-t border-slate-100">
+      <summary
+        className={[
+          "flex cursor-pointer list-none items-center",
+          "justify-between gap-3 py-3.5",
+          "text-sm font-semibold text-[#354052]",
+          "transition-colors hover:text-(--brand)",
+          "[&::-webkit-details-marker]:hidden",
+        ].join(" ")}
+      >
         {label}
-        <ChevronDown className="size-4" />
+
+        <ChevronDown
+          aria-hidden="true"
+          className="size-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
+        />
       </summary>
-      <div className="pb-2 pl-4">
-        {items.map(([title, href]) => (
-          <Link
-            key={href}
-            href={href}
-            className="block py-2 text-xs font-medium uppercase leading-5 text-[#657187] hover:text-(--brand)"
-          >
-            {title}
-          </Link>
+
+      <ul className="pb-3 pl-4">
+        {items.map(({ label: itemLabel, href }) => (
+          <li key={`${itemLabel}-${href}`}>
+            <Link
+              href={href}
+              onClick={onNavigate}
+              className="block py-2.5 text-xs font-medium uppercase leading-5 text-[#657187] transition-colors hover:text-(--brand)"
+            >
+              {itemLabel}
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </details>
   );
 }
 
-interface AppHeaderProps {
-  active?: "home" | "industry" | "solution" | "blog" | "contact";
-}
+// Main header
+export default function AppHeader({ active }: AppHeaderProps) {
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileMenuId = useId();
 
-export default function AppHeader({ active = "home" }: AppHeaderProps) {
-  const [overHero, setOverHero] = useState(true);
+  const currentPage = active ?? resolveActive(pathname);
 
+  // Scroll behavior
   useEffect(() => {
-    const updateNavbar = () => setOverHero(window.scrollY <= 74);
-    const frame = requestAnimationFrame(updateNavbar);
-    window.addEventListener("scroll", updateNavbar, { passive: true });
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 74);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
     return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", updateNavbar);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const homeClass =
-    active === "home"
-      ? "text-(--brand)"
-      : "text-[#354052] hover:text-(--brand)";
-  const blogClass =
-    active === "blog"
-      ? "text-(--brand)"
-      : "text-[#354052] hover:text-(--brand)";
-  const contactClass =
-    active === "contact"
-      ? "text-(--brand)"
-      : "text-[#354052] hover:text-(--brand)";
+  // Transparent only on homepage
+  const transparent = pathname === "/" && !scrolled && !mobileOpen;
 
   return (
     <header
       id="topnav"
-      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-300 ${overHero ? "border-b border-transparent bg-transparent shadow-none" : "border-b border-black/[0.04] bg-white/95 shadow-[0_2px_12px_rgba(15,23,42,.04)] backdrop-blur-md"}`}
+      className={[
+        "fixed inset-x-0 top-0 z-50",
+        "border-b transition-[background-color,border-color,box-shadow] duration-300",
+        transparent
+          ? "border-transparent bg-transparent shadow-none"
+          : "border-black/5 bg-white/95 shadow-[0_2px_12px_rgba(15,23,42,.05)] backdrop-blur-md",
+      ].join(" ")}
     >
-      <div className="mx-auto flex h-18.5 w-full max-w-277.5 items-center justify-between px-5 sm:px-6">
-        <Link
-          href="/"
-          className="relative block h-6.5 w-33.75 shrink-0"
-          aria-label="Karomap beranda"
-        >
-          <Image
-            src="/beranda2/karomap-logo.png"
-            alt="Karomap"
-            fill
-            priority
-            sizes="135px"
-            className="object-contain object-left"
-          />
-        </Link>
-
-        <nav
-          className="hidden h-full items-center gap-8 lg:flex"
-          aria-label="Navigasi utama"
-        >
+      <PageContainer>
+        <div className="flex h-18.5 items-center justify-between gap-6">
+          {/* Logo */}
           <Link
             href="/"
-            className={`flex h-full items-center text-[13px] font-semibold tracking-[0.04em] transition-colors ${homeClass}`}
+            aria-label="Karomap - Beranda"
+            className="relative block h-7 w-34 shrink-0"
           >
-            BERANDA
+            <Image
+              src="/beranda2/karomap-logo.png"
+              alt="Karomap"
+              fill
+              priority
+              sizes="136px"
+              className="object-contain object-left"
+            />
           </Link>
-          <DesktopMenu
-            label="INDUSTRI"
-            items={industries}
-            active={active === "industry"}
-          />
-          <DesktopMenu
-            label="SOLUSI"
-            items={solutions}
-            active={active === "solution"}
-          />
-          <Link
-            href="/blog"
-            className={`flex h-full items-center text-[13px] font-semibold tracking-[0.04em] transition-colors ${blogClass}`}
-          >
-            ARTIKEL
-          </Link>
-          <Link
-            href="/contact"
-            className={`flex h-full items-center text-[13px] font-semibold tracking-[0.04em] transition-colors ${contactClass}`}
-          >
-            KONTAK
-          </Link>
-        </nav>
 
-        <details className="group relative lg:hidden">
-          <summary
-            className="grid size-11 cursor-pointer list-none place-items-center rounded-md text-[#354052] hover:bg-slate-100 marker:content-none"
-            aria-label="Buka menu"
-          >
-            <Menu className="size-6" />
-          </summary>
+          {/* Desktop navigation */}
           <nav
-            className="absolute right-0 top-[calc(100%+15px)] w-[min(22rem,calc(100vw-2.5rem))] border-t-2 border-(--brand) bg-white px-5 py-3 shadow-xl"
-            aria-label="Navigasi mobile"
+            aria-label="Navigasi utama"
+            className="hidden h-full items-center gap-7 lg:flex xl:gap-9"
           >
-            <Link
-              href="/"
-              className={`block py-3 text-sm font-semibold ${homeClass}`}
-            >
-              BERANDA
-            </Link>
-            <MobileMenu label="Industri" items={industries} />
-            <MobileMenu label="Solusi" items={solutions} />
-            <Link
-              href="/blog"
-              className={`block border-t border-slate-100 py-3 text-sm font-semibold ${blogClass}`}
-            >
-              ARTIKEL
-            </Link>
-            <Link
-              href="/contact"
-              className={`block border-t border-slate-100 py-3 text-sm font-semibold ${contactClass}`}
-            >
-              KONTAK
-            </Link>
+            {navItems.map((item) => {
+              const isActive = currentPage === item.key;
+
+              if (item.type === "dropdown") {
+                return (
+                  <DesktopDropdown
+                    key={item.key}
+                    label={item.label}
+                    items={item.items}
+                    active={isActive}
+                  />
+                );
+              }
+
+              return (
+                <Link
+                  key={item.key}
+                  href={item.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={[
+                    "flex h-full items-center",
+                    navTextClass,
+                    getNavColor(isActive),
+                  ].join(" ")}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
-        </details>
-      </div>
+
+          {/* Mobile toggle */}
+          <button
+            type="button"
+            aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
+            aria-controls={mobileMenuId}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((prev) => !prev)}
+            className={[
+              "grid size-10 shrink-0 place-items-center rounded-lg",
+              "text-[#354052] transition-colors",
+              "hover:bg-slate-100",
+              "focus-visible:outline-2",
+              "focus-visible:outline-offset-2",
+              "focus-visible:outline-(--brand)",
+              "lg:hidden",
+            ].join(" ")}
+          >
+            {mobileOpen ? (
+              <X className="size-6" />
+            ) : (
+              <Menu className="size-6" />
+            )}
+          </button>
+        </div>
+      </PageContainer>
+
+      {/* Mobile navigation */}
+      <nav
+        id={mobileMenuId}
+        aria-label="Navigasi mobile"
+        aria-hidden={!mobileOpen}
+        className={[
+          "absolute inset-x-4 top-full z-50 mt-2",
+          "mx-auto max-w-md overflow-hidden",
+          "rounded-xl border border-slate-100",
+          "border-t-2 border-t-(--brand)",
+          "bg-white shadow-[0_15px_45px_rgba(15,23,42,.12)]",
+          "transition-[opacity,transform,visibility] duration-200",
+          "lg:hidden",
+          mobileOpen
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-2 opacity-0",
+        ].join(" ")}
+        {...(!mobileOpen ? { inert: true } : {})}
+      >
+        <div className="max-h-[calc(100dvh-6rem)] overflow-y-auto px-5 py-2">
+          {navItems.map((item) => {
+            const isActive = currentPage === item.key;
+
+            if (item.type === "dropdown") {
+              return (
+                <MobileDropdown
+                  key={item.key}
+                  label={item.label}
+                  items={item.items}
+                  onNavigate={() => setMobileOpen(false)}
+                />
+              );
+            }
+
+            return (
+              <Link
+                key={item.key}
+                href={item.href}
+                aria-current={isActive ? "page" : undefined}
+                onClick={() => setMobileOpen(false)}
+                className={[
+                  "block border-t border-slate-100 py-3.5",
+                  "text-sm font-semibold",
+                  "transition-colors",
+                  getNavColor(isActive),
+                ].join(" ")}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+      </nav>
     </header>
   );
 }

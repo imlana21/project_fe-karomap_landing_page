@@ -1,7 +1,7 @@
 import { PageContainer } from "@/components/site/page-container";
 import { features } from "@/stores/static/beranda2";
 
-export function FeaturesSection() {
+export default function FeaturesSection() {
   return (
     <section className="pb-28 pt-20 md:pt-44 lg:pb-36 lg:pt-52">
       <PageContainer className="grid gap-x-24 gap-y-12 md:grid-cols-2">

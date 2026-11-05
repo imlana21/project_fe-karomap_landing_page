@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import AppHeader from "@/components/AppHeader";
 import { ClientsSection } from "./partials/clients-section";
-import { ContactSection } from "./partials/contact-section";
-import { FeaturesSection } from "./partials/features-section";
-import { HeroSection } from "./partials/hero-section";
+import FeaturesSection from "./partials/features-section";
+import HeroSection from "./partials/HeroSection";
 import { HomeFooter } from "./partials/home-footer";
-import { IndustriesSection } from "./partials/industries-section";
-import { ShowcasesSection } from "./partials/showcases-section";
-import { TechStackSection } from "./partials/tech-stack-section";
+import { IndustriesSection } from "./partials/IndustriesSection";
+import TechStackSection from "./partials/TechStackSection";
+import ServicesSection from "./partials/ServicesSection";
 
 export const metadata: Metadata = {
   title: "Karomap - Field Inspection App",
@@ -22,10 +21,9 @@ export default function HomePage() {
       <main>
         <HeroSection />
         <FeaturesSection />
-        <ShowcasesSection />
+        <ServicesSection />
         <TechStackSection />
         <IndustriesSection />
-        <ContactSection />
         <ClientsSection />
       </main>
       <HomeFooter />
