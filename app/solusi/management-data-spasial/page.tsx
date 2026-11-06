@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/stores/static/config";
 import Image from "next/image";
 import AppHeader from "../../../components/AppHeader";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,7 +9,7 @@ import { PageHero } from "@/components/site/PageHero";
 import AppFooter from "@/components/AppFooter";
 
 export const metadata: Metadata = {
-  title: "Manajemen Data Spasial Pertambangan | Karomap",
+  title: "Manajemen Data Spasial Pertambangan",
   description:
     "Sistem inspeksi lapangan dan pengelolaan data spasial pertambangan terintegrasi berbasis mobile, WebGIS, dan dashboard.",
 };
@@ -55,7 +56,7 @@ export function MiningPage({ active }: { active: "industry" | "solution" }) {
             <div className="relative aspect-[16/7] overflow-hidden rounded-lg bg-slate-100 shadow-[0_15px_40px_rgba(31,41,55,.12)]">
               <Image
                 src="/solutions/management-data-spasial.jpg"
-                alt="Sistem pengelolaan data spasial pertambangan Karomap"
+                alt={`Sistem pengelolaan data spasial pertambangan ${siteConfig.brand}`}
                 fill
                 priority
                 sizes="(min-width: 1110px) 1110px, 100vw"

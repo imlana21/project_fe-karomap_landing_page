@@ -1,11 +1,11 @@
-export interface BlogPost {
+export type BlogPost = {
   slug: string;
   title: string;
   image: string;
   author: string;
   date: string;
   comments: number;
-}
+};
 
 export const blogPosts: BlogPost[] = [
   {

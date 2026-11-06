@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/stores/static/config";
 import { Geist_Mono, Nunito } from "next/font/google";
 import "./globals.css";
 
@@ -14,10 +15,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Karomap",
-    template: "%s | Karomap",
+    default: siteConfig.brand,
+    template: `%s | ${siteConfig.brand}`,
   },
-  description: "Platform inspeksi lapangan dan manajemen data spasial Karomap.",
+  description: `Platform inspeksi lapangan dan manajemen data spasial ${siteConfig.brand}.`,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

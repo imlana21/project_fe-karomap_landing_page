@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { siteConfig } from "@/stores/static/config";
 import AppHeader from "../../components/AppHeader";
 import { PageHero } from "@/components/site/PageHero";
 import AppFooter from "@/components/AppFooter";
@@ -9,9 +10,9 @@ import {
 } from "./contact-sections";
 
 export const metadata: Metadata = {
-  title: "Kontak | Karomap",
+  title: "Kontak",
   description:
-    "Hubungi Karomap Semesta untuk solusi inspeksi lapangan dan WebGIS.",
+    `Hubungi ${siteConfig.name} untuk solusi inspeksi lapangan dan WebGIS.`,
 };
 
 export default function ContactPage() {

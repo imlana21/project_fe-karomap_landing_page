@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   experimental: {
     agentFeedback: true,
   },
+  images: {
+    remotePatterns: [new URL("https://www.karomap.com/media/**")],
+  },
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { siteConfig, contactLinks } from "@/stores/static/config";
 import { PageContainer } from "@/components/site/PageContainer";
 import { cn } from "@/lib/utils";
 import { Fragment } from "react";
@@ -19,7 +20,7 @@ function HeroContainer() {
             Pengembangan Aplikasi GIS
           </h1>
 
-          <p className="max-w-[48ch] leading-7 text-[#65758b]">
+          <p className="max-w-[48ch] leading-7 text-[#354052]">
             Solusi aplikasi GIS berbasis web dan mobile untuk mendukung
             pengelolaan data spasial, operasional lapangan, dan pengambilan
             keputusan.
@@ -50,36 +51,36 @@ function HeroContainer() {
         {/* Contact */}
         <address className="mt-7 flex flex-col gap-3 not-italic sm:flex-row sm:flex-wrap sm:gap-x-6">
           <a
-            href="mailto:contact@karomap.com"
-            className="inline-flex items-center gap-2 text-sm text-[#65758b] transition-colors hover:text-(--brand)"
+            href={contactLinks.email}
+            className="inline-flex items-center gap-2 text-sm text-[#354052] transition-colors hover:text-(--brand)"
           >
             <Mail
               className="size-4 shrink-0 text-(--brand)"
               aria-hidden="true"
             />
-            contact@karomap.com
+            {siteConfig.email}
           </a>
 
           <a
-            href="tel:02742820302"
-            className="inline-flex items-center gap-2 text-sm text-[#65758b] transition-colors hover:text-(--brand)"
+            href={contactLinks.telp}
+            className="inline-flex items-center gap-2 text-sm text-[#354052] transition-colors hover:text-(--brand)"
           >
             <Phone
               className="size-4 shrink-0 text-(--brand)"
               aria-hidden="true"
             />
-            0274 2820 302
+            {siteConfig.telp}
           </a>
           <a
-            href="https://wa.me/+6281327483846"
-            className="inline-flex items-center gap-2 text-sm text-[#65758b] transition-colors hover:text-(--brand)"
+            href={contactLinks.wa}
+            className="inline-flex items-center gap-2 text-sm text-[#354052] transition-colors hover:text-(--brand)"
             target="_blank"
           >
             <Smartphone
               className="size-4 shrink-0 text-(--brand)"
               aria-hidden="true"
             />
-            0813 2748 3846
+            {siteConfig.wa}
           </a>
         </address>
       </div>
@@ -88,7 +89,7 @@ function HeroContainer() {
           {/* Laptop - Background */}
           <Image
             src="/home/laptop.png"
-            alt="Dashboard Karomap pada laptop"
+            alt={`Dashboard ${siteConfig.brand} pada laptop`}
             width={1000}
             height={697}
             priority
@@ -96,6 +97,7 @@ function HeroContainer() {
             className={cn(
               "pointer-events-none absolute z-0 hidden h-auto max-w-none",
               "drop-shadow-2xl",
+              "right-0 bottom-0",
               "lg:right-[-25%] lg:top-[-16%] lg:block lg:w-[135%]",
               "xl:right-[-20%] xl:top-0 xl:w-full",
             )}
@@ -104,7 +106,7 @@ function HeroContainer() {
           {/* Phone - Foreground */}
           <Image
             src="/home/phone.png"
-            alt="Aplikasi inspeksi Karomap pada ponsel"
+            alt={`Aplikasi inspeksi ${siteConfig.brand} pada ponsel`}
             width={1078}
             height={1291}
             priority
@@ -113,7 +115,6 @@ function HeroContainer() {
               "pointer-events-none absolute z-10 h-auto max-w-none",
               "drop-shadow-2xl",
               "bottom-0 left-1/2 w-[75%] max-w-[320px] -translate-x-1/2",
-              "sm:w-[65%]",
               "lg:bottom-[4%] lg:left-[2%] lg:w-[46%] lg:max-w-95 lg:translate-x-0",
               "xl:left-[25%] xl:w-[40%] xl:top-[20%]",
             )}

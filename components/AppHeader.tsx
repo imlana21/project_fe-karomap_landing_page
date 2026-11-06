@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { siteConfig } from "@/stores/static/config";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -45,22 +46,6 @@ const solutionLinks: MenuLink[] = [
   {
     label: "Manajemen Data Spasial Pertambangan",
     href: "/solusi/management-data-spasial",
-  },
-  {
-    label: "Efisiensi dan Transparansi Data Produksi Kelapa Sawit",
-    href: "/efisiensi-dan-transparansi-data",
-  },
-  {
-    label: "Jalan dan Jembatan",
-    href: "/jalan-dan-jembatan",
-  },
-  {
-    label: "Keselamatan Kerja dan Aset Fisik",
-    href: "/keselamatan-kerja-dan-asset",
-  },
-  {
-    label: "PDAM",
-    href: "/pdam",
   },
 ];
 
@@ -305,12 +290,12 @@ export default function AppHeader({ active }: AppHeaderProps) {
           {/* Logo */}
           <Link
             href="/"
-            aria-label="Karomap - Beranda"
+            aria-label={`${siteConfig.brand} - Beranda`}
             className="relative block h-7 w-34 shrink-0"
           >
             <Image
               src="/logo.webp"
-              alt="Karomap"
+              alt={siteConfig.brand}
               fill
               priority
               sizes="136px"

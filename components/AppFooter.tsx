@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { siteConfig, contactLinks } from "@/stores/static/config";
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,7 @@ export default function AppFooter({
           <p>
             © 2026{" "}
             <Link href="/" className="text-white hover:text-(--brand)">
-              Karomap Semesta
+              {siteConfig.name}
             </Link>
             . All rights reserved.
           </p>
@@ -53,27 +54,33 @@ export default function AppFooter({
         </svg>
         <PageContainer className="relative z-20 flex flex-col justify-between gap-12 pb-12 pt-10 md:flex-row">
           <section>
-            <Image src="/logo-dark.png" alt="Karomap" width={135} height={26} />
+            <Image
+              src="/logo-dark.png"
+              alt={siteConfig.brand}
+              width={135}
+              height={30}
+              style={{ height: "auto" }}
+            />
             <p className="mt-5 max-w-md text-sm leading-7">
-              Jl. Cendrawasih, Mejing Lor, Ambarketawang, Gamping, Sleman 55294
+              {siteConfig.alamat}
             </p>
             <p className="mt-3 text-sm leading-7">
               Telepon:{" "}
-              <a href="tel:02742820302" className="hover:text-white">
-                0274 2820 302
+              <a href={contactLinks.telp} className="hover:text-white">
+                {siteConfig.telp}
               </a>
               <br />
               WA:{" "}
               <a
-                href="https://wa.me/+6281327483846"
+                href={contactLinks.wa}
                 className="hover:text-white"
               >
-                0813 2748 3846
+                {siteConfig.wa}
               </a>
               <br />
               Email:{" "}
-              <a href="mailto:contact@karomap.com" className="hover:text-white">
-                contact@karomap.com
+              <a href={contactLinks.email} className="hover:text-white">
+                {siteConfig.email}
               </a>
             </p>
           </section>
@@ -107,7 +114,7 @@ export default function AppFooter({
         </PageContainer>
         <div className="border-t border-white/10 py-6">
           <PageContainer className="text-sm">
-            © 2026 Karomap Semesta. All rights reserved.
+            © 2026 {siteConfig.name}. All rights reserved.
           </PageContainer>
         </div>
       </footer>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { siteConfig, contactLinks } from "@/stores/static/config";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { ContactForm } from "@/components/site/ContactField";
 import { PageContainer } from "@/components/site/PageContainer";
@@ -8,25 +9,21 @@ const contacts = [
   {
     title: "Telepon",
     description:
-      "Hubungi tim Karomap untuk informasi produk dan kebutuhan implementasi.",
+      `Hubungi tim ${siteConfig.brand} untuk informasi produk dan kebutuhan implementasi.`,
     icon: Phone,
     content: (
       <>
-        <a href="tel:+622742820302" className="text-(--brand) hover:underline">
-          +62 274 2820 302
-        </a>
-        <span>, </span>
-        <a href="tel:+6289623498800" className="text-(--brand) hover:underline">
-          +62 896 2349 8800
+        <a href={contactLinks.telp} className="text-(--brand) hover:underline">
+          {siteConfig.telp}
         </a>
         <p className="mt-2">
           <a
-            href="https://wa.me/6289623498800"
+            href={contactLinks.wa}
             target="_blank"
             rel="noreferrer"
             className="text-(--brand) hover:underline"
           >
-            +62 896 2349 8800
+            {siteConfig.wa}
           </a>{" "}
           (WhatsApp)
         </p>
@@ -39,21 +36,21 @@ const contacts = [
     icon: Mail,
     content: (
       <a
-        href="mailto:contact@karomap.com?subject=Pertanyaan Produk Karomap"
+        href={`${contactLinks.email}?subject=${encodeURIComponent(`Pertanyaan Produk ${siteConfig.brand}`)}`}
         className="text-(--brand) hover:underline"
       >
-        contact@karomap.com
+        {siteConfig.email}
       </a>
     ),
   },
   {
     title: "Lokasi",
     description:
-      "Jl. Cendrawasih, Mejing Lor, Ambarketawang, Gamping, Sleman 55294",
+      siteConfig.alamat,
     icon: MapPin,
     content: (
       <a
-        href="https://goo.gl/maps/2LpnchFZUNXbYmzD6"
+        href={contactLinks.maps}
         target="_blank"
         rel="noreferrer"
         className="font-medium text-(--brand) hover:underline"
@@ -99,7 +96,7 @@ export function ContactFormSection() {
           <div className="absolute inset-8 rounded-full bg-orange-50 blur-3xl" />
           <Image
             src="/beranda2/hero.png"
-            alt="Platform inspeksi Karomap"
+            alt={`Platform inspeksi ${siteConfig.brand}`}
             fill
             priority
             sizes="(min-width: 768px) 55vw, 100vw"
@@ -115,8 +112,8 @@ export function ContactMapSection() {
   return (
     <PageContainer className="">
       <iframe
-        title="Karomap Semesta"
-        src="https://www.google.com/maps?q=Karomap%20Sleman&output=embed"
+        title={siteConfig.name}
+        src={`${contactLinks.maps}&output=embed`}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
         className="block h-100 w-full border-0 rounded-lg"
