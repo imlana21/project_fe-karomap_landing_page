@@ -10,6 +10,7 @@ import AppFooter from "@/components/AppFooter";
 
 export const metadata: Metadata = {
   title: "Manajemen Data Spasial Pertambangan",
+  alternates: { canonical: "/solusi/management-data-spasial" },
   description:
     "Sistem inspeksi lapangan dan pengelolaan data spasial pertambangan terintegrasi berbasis mobile, WebGIS, dan dashboard.",
 };

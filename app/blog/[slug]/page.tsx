@@ -9,8 +9,7 @@ import { CalendarDays, MessageCircle, UserRound } from "lucide-react";
 import AppHeader from "@/components/AppHeader";
 import AppFooter from "@/components/AppFooter";
 import { PageContainer } from "@/components/site/PageContainer";
-import { PageHero } from "@/components/site/PageHero";
-import { blogText, mediaUrl, sanitizeBlogHtml } from "@/lib/blog-html";
+import { blogText, mediaUrl, sanitizeBlogHtml, serializeJsonLd } from "@/lib/blog-html";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -28,8 +27,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description,
     alternates: { canonical: url },
+    twitter: {
+      card: post.featured_image ? "summary_large_image" : "summary",
+      title: post.title, description,
+      ...(post.featured_image ? { images: [mediaUrl(post.featured_image)] } : {}),
+    },
     openGraph: {
       type: "article", title: post.title, description, url, siteName: siteConfig.brand,
+      ...(Number.isFinite(Date.parse(post.published_at)) ? { publishedTime: post.published_at } : {}),
+      ...(Number.isFinite(Date.parse(post.updated_at)) ? { modifiedTime: post.updated_at } : {}),
       ...(post.featured_image ? { images: [{ url: mediaUrl(post.featured_image), alt: post.title }] } : {}),
     },
   };
@@ -60,14 +66,38 @@ async function Article({ params }: Props) {
   const categories = [...new Map(posts.flatMap((item) => item.categories).map((item) => [item.id, item])).values()];
   const tags = [...new Map(posts.flatMap((item) => item.tags).map((item) => [item.id, item])).values()];
 
+  const url = `${siteConfig.url}/blog/${encodeURIComponent(post.slug)}`;
+  const author = [post.author.first_name, post.author.last_name].filter(Boolean).join(" ") || post.author.username;
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting", "@id": `${url}#article`, mainEntityOfPage: url,
+        headline: post.title, description: blogText(post.description || post.body).slice(0, 160),
+        ...(author ? { author: { "@type": "Person", name: author } } : {}),
+        publisher: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+        ...(post.featured_image ? { image: mediaUrl(post.featured_image) } : {}),
+        ...(Number.isFinite(Date.parse(post.published_at)) ? { datePublished: post.published_at } : {}),
+        ...(Number.isFinite(Date.parse(post.updated_at)) ? { dateModified: post.updated_at } : {}),
+      },
+      {
+        "@type": "BreadcrumbList", itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Beranda", item: siteConfig.url },
+          { "@type": "ListItem", position: 2, name: "Artikel", item: `${siteConfig.url}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: url },
+        ],
+      },
+    ],
+  };
   return <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }} />
     <article className="min-w-0 overflow-hidden rounded-md bg-white shadow-[0_10px_35px_rgba(31,41,55,.10)]">
       {post.featured_image && <div className="relative aspect-16/10 bg-slate-100">
-        <Image src={mediaUrl(post.featured_image)} alt={post.title} fill sizes="(min-width: 1024px) 700px, 100vw" className="object-cover" />
+        <Image src={mediaUrl(post.featured_image)} alt={post.title} fill sizes="(min-width: 1024px) 700px, 100vw" className="object-cover" priority />
       </div>}
       <div className="p-6 sm:p-8">
         <div className="mb-4 flex flex-wrap gap-2">{post.categories.map((category) => <span key={category.id} className="rounded bg-orange-50 px-3 py-1 text-xs font-medium text-(--brand)">{category.title}</span>)}</div>
-        <h2 className="text-2xl font-semibold leading-snug sm:text-3xl">{post.title}</h2>
+        <h1 className="text-2xl font-semibold leading-snug sm:text-3xl">{post.title}</h1>
         <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-500">
           <span className="inline-flex items-center gap-2"><UserRound className="size-4" aria-hidden="true" />{[post.author.first_name, post.author.last_name].filter(Boolean).join(" ") || post.author.username}</span>
           <time dateTime={post.published_at} className="inline-flex items-center gap-2"><CalendarDays className="size-4" aria-hidden="true" />{dateLabel(post.published_at)}</time>
@@ -112,7 +142,9 @@ export default function BlogDetailPage(props: Props) {
   return <div className="min-h-screen bg-white text-[#111827] [--brand:#f45100]">
     <Suspense fallback={<div className="h-20" />}><AppHeader active="blog" /></Suspense>
     <main>
-      <PageHero title="Detail Artikel" current="Blog" />
+      <div className="bg-[#f7f8fb] py-16 text-center">
+        <nav aria-label="Breadcrumb" className="text-sm"><Link href="/">Beranda</Link> / <Link href="/blog">Artikel</Link></nav>
+      </div>
       <section className="py-20 sm:py-28"><PageContainer>
         <Suspense fallback={<p role="status" className="py-12 text-slate-500">Memuat artikel…</p>}><Article {...props} /></Suspense>
       </PageContainer></section>

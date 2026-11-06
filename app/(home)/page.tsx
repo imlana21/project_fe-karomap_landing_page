@@ -8,7 +8,8 @@ import ServicesSection from "./partials/ServicesSection";
 import AppFooter from "@/components/AppFooter";
 
 export const metadata: Metadata = {
-  title: "Beranda",
+  title: "Pengembangan Aplikasi GIS & WebGIS",
+  alternates: { canonical: "/" },
   description:
     "Platform inspeksi lapangan online dan offline dengan WebGIS, laporan otomatis, dan manajemen data spasial.",
 };

@@ -1,14 +1,6 @@
 import {
-  Bookmark,
-  ClipboardList,
-  History,
-  Layers3,
-  LockKeyhole,
   Monitor,
-  RefreshCw,
   Smartphone,
-  Users,
-  Wifi,
   type LucideIcon,
 } from "lucide-react";
 

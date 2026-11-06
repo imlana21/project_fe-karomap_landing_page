@@ -11,6 +11,7 @@ import {
 
 export const metadata: Metadata = {
   title: "Kontak",
+  alternates: { canonical: "/contact" },
   description:
     `Hubungi ${siteConfig.name} untuk solusi inspeksi lapangan dan WebGIS.`,
 };

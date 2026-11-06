@@ -42,21 +42,21 @@ export default async function BlogContent({ searchParams }: { searchParams: Prom
   return (
     <>
     <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-      {posts.map((post) => (
+      {posts.map((post, index) => (
         <article key={post.slug}>
           <Card className="group h-full overflow-hidden rounded-md border-0 bg-white p-0 shadow-[0_10px_35px_rgba(31,41,55,.10)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(31,41,55,.15)]">
             <Link
               href={`/blog/${encodeURIComponent(post.slug)}`}
               className="relative block aspect-16/10 overflow-hidden bg-slate-100"
             >
-              <Image
+              {post.featured_image && <Image
                 src={mediaUrl(post.featured_image)}
                 alt={post.title}
                 fill
                 sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                 className="object-cover transition duration-500 group-hover:scale-105"
-                loading="eager"
-              />
+                priority={index < 3}
+              />}
               <span className="absolute inset-0 bg-black/0 transition group-hover:bg-black/10" />
             </Link>
             <CardContent className="p-6">

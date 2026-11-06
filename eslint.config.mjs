@@ -13,6 +13,8 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "types/**",
+    // CJS test scripts — not part of the app bundle
+    "scripts/**",
   ]),
 ]);
 

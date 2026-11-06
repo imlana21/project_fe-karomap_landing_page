@@ -10,12 +10,12 @@ export type BlogPost = {
   featured_image: string;
   description: string;
   body: string;
-  configs: any;
+  configs: Record<string, unknown> | null;
   published: boolean;
   published_at: string;
   created_at: string;
   updated_at: string;
-  deleted_at: any;
+  deleted_at: string | null;
 };
 
 export type BlogAuthor = {
@@ -35,7 +35,7 @@ export type BlogCategory = {
   slug: string;
   created_at: string;
   updated_at: string;
-  parent: any;
+  parent: number | null;
 };
 
 export type BlogTag = {

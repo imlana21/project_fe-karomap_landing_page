@@ -1,5 +1,9 @@
 import sanitizeHtml from "sanitize-html";
 
+export function serializeJsonLd(value: unknown): string {
+  return JSON.stringify(value).replace(/</g, "\\u003c");
+}
+
 export function mediaUrl(value: string): string {
   return value.startsWith("/media/") || value.startsWith("media/")
     ? new URL(value, "https://www.karomap.com/").href
@@ -9,7 +13,7 @@ export function mediaUrl(value: string): string {
 export function blogText(html: string): string {
   let text = "";
   sanitizeHtml(html, {
-    allowedTags: [], allowedAttributes: {},
+    allowedTags: sanitizeHtml.defaults.allowedTags, allowedAttributes: {},
     textFilter: (value) => { text += value; return value; },
     exclusiveFilter: (frame) => { if (["p", "div", "br", "li", "h2", "h3"].includes(frame.tag)) text += " "; return false; },
   });
